@@ -37,3 +37,7 @@ I'm trying to formulate a yosys select statement that will find all the outputs 
 This is close but doesn't work yet.
 
     yosys -p 'read_liberty -lib ./merged.lib;  read_verilog -sv wrapped_picorv32.v ; prep -top wrapped_picorv32 ; dump w:wbs_dat_o %ci1 c:* %i t:sky*ebufn* %d'
+
+# Formal check
+
+also trying with tristate.v & tribuf.sby to prove that the outputs of the modules are properly tristated by instantiating 2 modules and then using the new tribuf support.
