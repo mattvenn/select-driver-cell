@@ -1,0 +1,25 @@
+[options]
+mode prove
+depth 5
+
+[engines]
+smtbmc
+
+[script]
+read -noverific
+read -define FORMAL
+read -define UNIT_DELAY=#1
+read -define FUNCTIONAL
+read -define USE_POWER_PINS
+read -sv tristate.v
+read -sv wrapped_picorv32.v
+read -sv sky130_fd_sc_hd.v
+
+prep -top tristate_test
+
+flatten; tribuf -formal
+
+[files]
+tristate.v
+wrapped_picorv32.v
+sky130_fd_sc_hd.v
