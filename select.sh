@@ -1,1 +1,2 @@
-yosys -p 'read_liberty -lib ./merged.lib;  read_verilog -sv wrapped_picorv32.v ; prep -top wrapped_picorv32 ; dump w:wbs_dat_o %ci1 c:* %i t:sky*ebufn* %d'
+yosys -p 'read_liberty -lib merged.lib; read_verilog -sv wrapped_cpr.v      ; select -set tristate_wires t:sky130_fd_sc_hd__ebufn_* %co:[Z] w:* %i; select -assert-none @tristate_wires %co:sky130_fd_sc_hd__buf* w:* %d'
+yosys -p 'read_liberty -lib merged.lib; read_verilog -sv wrapped_picorv32.v ; select -set tristate_wires t:sky130_fd_sc_hd__ebufn_* %co:[Z] w:* %i; select -assert-none @tristate_wires %co:sky130_fd_sc_hd__buf* w:* %d'
